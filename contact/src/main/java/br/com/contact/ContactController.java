@@ -9,7 +9,13 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/V1/contacts")
-public class ContactsController {
+public class ContactController {
+
+    private final ContactService contactService;
+
+    public ContactController(ContactService contactService) {
+        this.contactService = contactService;
+    }
 
     private final List<Contact> contacts = new ArrayList<>();
     private static Long nextId = 1L;
@@ -29,7 +35,7 @@ public class ContactsController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void deleteContactByPathVariable(@PathVariable("id") Long id) {
         Contact deleteContact = this.contacts.stream()
                 .filter(c -> Objects.equals(c.getId(), id))
@@ -39,12 +45,13 @@ public class ContactsController {
     }
 
     @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void deleteContactByRequestParam(@RequestParam Long id) {
         this.contacts.removeIf(contact -> contact.getId().equals(id));
     }
 
-    @GetMapping("find-by-name")
+    @GetMapping("/find-by-name")
+    @ResponseStatus(HttpStatus.OK)
     public Contact getContactByName(@RequestParam String name) {
         return this.contacts.stream()
                 .filter(contact -> contact.getName().equals(name)).findAny().orElse(null);
