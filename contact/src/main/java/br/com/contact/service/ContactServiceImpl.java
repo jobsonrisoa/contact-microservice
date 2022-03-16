@@ -1,5 +1,7 @@
-package br.com.contact;
+package br.com.contact.service;
 
+import br.com.contact.repository.ContactRepository;
+import br.com.contact.model.Contact;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +21,11 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
+    public void updateContact(Contact contact) {
+        this.contactRepository.save(contact);
+    }
+
+    @Override
     public void removeContact(Long id) {
         this.contactRepository.deleteById(id);
     }
@@ -33,12 +40,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact getByName(String name) {
-        return this.contactRepository.findByName(name);
-    }
-
-    @Override
-    public List<Contact> getAllContacts(String name) {
+    public List<Contact> getAllContacts() {
        return this.contactRepository.findAll();
     }
 }

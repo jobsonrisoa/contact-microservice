@@ -1,5 +1,6 @@
-package br.com.contact;
+package br.com.contact.repository;
 
+import br.com.contact.model.Contact;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
