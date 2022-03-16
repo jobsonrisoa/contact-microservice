@@ -1,5 +1,7 @@
 package br.com.contact.model;
 
+import br.com.contact.controller.request.ContactRequest;
+import br.com.contact.controller.response.ContactResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +24,22 @@ public class Contact {
     private String name;
     private String email;
     private String phone;
+
+    public Contact convertRequestToContact(ContactRequest request) {
+        return  Contact.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .phone(request.getPhone())
+                .build();
+    }
+
+    public ContactResponse convertContactToResponse(Contact contact) {
+        return ContactResponse.builder()
+                .id(contact.getId())
+                .name(contact.getName())
+                .email(contact.getEmail())
+                .phone(contact.getPhone())
+                .build();
+    }
 
 }

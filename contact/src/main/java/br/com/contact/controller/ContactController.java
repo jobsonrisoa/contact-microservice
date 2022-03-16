@@ -1,5 +1,7 @@
 package br.com.contact.controller;
 
+import br.com.contact.controller.request.ContactRequest;
+import br.com.contact.controller.response.ContactResponse;
 import br.com.contact.service.ContactService;
 import br.com.contact.model.Contact;
 import org.springframework.http.HttpStatus;
@@ -20,14 +22,14 @@ public class ContactController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Contact> getAllContacts() {
+    public List<ContactResponse> getAllContacts() {
         return this.contactService.getAllContacts();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createContact(@RequestBody Contact contact) {
-        this.contactService.createContact(contact);
+    public void createContact(@RequestBody ContactRequest request) {
+        this.contactService.createContact(request);
     }
 
     @DeleteMapping
@@ -38,14 +40,14 @@ public class ContactController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public void updateContact(@RequestBody Contact contact) {
-        this.contactService.updateContact(contact);
+    public void updateContact(@RequestBody ContactRequest request) {
+        this.contactService.updateContact(request);
     }
 
 
     @GetMapping("/find-by-name")
     @ResponseStatus(HttpStatus.OK)
-    public Contact getContactByName(@RequestParam String name) {
+    public ContactResponse getContactByName(@RequestParam String name) {
         return this.contactService.getContactByName(name);
 
     }
