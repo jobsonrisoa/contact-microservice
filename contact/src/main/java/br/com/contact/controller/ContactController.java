@@ -44,6 +44,11 @@ public class ContactController {
         this.contactService.updateContact(request);
     }
 
+    @PutMapping("/update-by-id")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateContactById(@RequestBody ContactRequest request, @RequestParam Long id) {
+        this.contactService.updateContactById(request, id);
+    }
 
     @GetMapping("/find-by-name")
     @ResponseStatus(HttpStatus.OK)

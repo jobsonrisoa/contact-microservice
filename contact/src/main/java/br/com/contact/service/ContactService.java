@@ -10,6 +10,7 @@ public interface ContactService {
 
     void createContact(ContactRequest request);
     void updateContact(ContactRequest request);
+    void updateContactById(ContactRequest request, Long id);
     void removeContact(Long id);
     List<ContactResponse> getAllContacts();
     ContactResponse getContactByName(String name);
